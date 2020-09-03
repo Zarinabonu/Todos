@@ -188,6 +188,20 @@
             visibility: hidden;
 
         }
+        button {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            background: none;
+            font-size: 100%;
+            vertical-align: baseline;
+            font-family: inherit;
+            font-weight: inherit;
+            color: inherit;
+            -webkit-appearance: none;
+            appearance: none;
+            -webkit-font-smoothing: antialiased;
+        }
 
         .todo-list .view:hover button {
             visibility: visible;
@@ -238,7 +252,7 @@
             border: 1px solid transparent;
             border-radius: 3px;
         }
-        .filters li a.selected {
+        .filters li a.s {
             border-color: rgba(175, 47, 47, 0.2);
         }
         .one-line {
@@ -256,6 +270,19 @@
         del {
             display: inline-block;
             margin-bottom: .5rem;
+        }
+        .one-line input:focus{
+            outline: none;
+        }
+        .one-line button:focus{
+            outline: none;
+        }
+        .clear-completed {
+            float: right;
+            position: relative;
+            line-height: 20px;
+            text-decoration: none;
+            cursor: pointer;
         }
     </style>
 </head>

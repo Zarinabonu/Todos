@@ -1,0 +1,31 @@
+.completed {
+    text-decoration: line-through;
+}
+
+div {
+    border-radius: 5px;
+    /*background-color: #f2f2f2;*/
+    padding: 20px;
+}
+
+input[type=text], select {
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #f2f2f2;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+body li {
+    text-align: center;
+    text-decoration: none;
+    list-style: none;
+}
+.container {
+    display: grid;
+    text-align: center;
+}
+body li label {
+    width: 60%;
+}

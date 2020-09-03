@@ -1,53 +1,107 @@
 <template>
-  <div id="app">
-    <h1>todos</h1>
-    <div>
-      <div class="container">
-        <tr>
-          <header>
-            <button @click="checkAll" class="btn btn-info">Check all</button>
-            <button @click="UnCheckAll" class="btn btn-warning">UnCheck all</button>
-            <input v-model="task" @keypress.enter="addTodo" type="text">
-            <!--          <input type="text" id="fname" name="firstname" placeholder="Your name..">-->
-          </header>
-        </tr>
-        <tr>
-          <body>
-          <div>
-            <ul>
-              <li v-for="task in getTasks" v-bind:key="task.id">
-                <input v-model="task.completed" type="checkbox">
-                <del v-if="task.completed == true">{{ task.task }} {{ task.completed }}</del>
-                <label v-else="">{{ task.task }}</label>
-                <button @click="deleteTodo(task.id)" class="btn btn-danger">remove</button>
-              </li>
-            </ul>
-          </div>
-          </body>
-        </tr>
-        <tr>
-          <footer>
-            <div>
-              <label>{{ tasks.length }} item left</label>
-              <button value="all" @click="isAll" class="btn btn-info">All</button>
-              <button id="activeButton" value="active" @click="isActive" class="btn btn-info">Active {{
-                  activeTasks.length
-                }}
-              </button>
-              <button value="completed" @click="isCompleted" class="btn btn-info">Completed {{
-                  completedTasks.length
-                }}
-              </button>
-            </div>
-            <button @click="deleteCompleted(task.id)" v-if="completedTasks.length > 0" class="btn btn-danger">Delete
-              completed
-            </button>
-          </footer>
-        </tr>
+  <!--    <div class="app" id="app">-->
+  <!--      <header>-->
+  <!--        <h1>todos</h1>-->
+  <!--        &lt;!&ndash;            <button @click="checkAll" class="btn btn-info">Check all</button>&ndash;&gt;-->
+  <!--        &lt;!&ndash;            <button @click="UnCheckAll" class="btn btn-warning">UnCheck all</button>&ndash;&gt;-->
+  <!--        <input v-model="task" @keypress.enter="addTodo" type="text" placeholder="What needs to be done?" autofocus>-->
+  <!--        &lt;!&ndash;          <input type="text" id="fname" name="firstname" placeholder="Your name..">&ndash;&gt;-->
+  <!--      </header>-->
+  <!--      <body>-->
+  <!--      <ul>-->
+  <!--        <li v-for="task in getTasks" v-bind:key="task.id">-->
+  <!--          <input v-model="task.completed" type="checkbox">-->
+  <!--          <del v-if="task.completed == true">{{ task.task }} {{ task.completed }}</del>-->
+  <!--          <label v-else="">{{ task.task }}</label>-->
+  <!--          <button @click="deleteTodo(task.id)" class="btn btn-danger">remove</button>-->
+  <!--        </li>-->
+  <!--      </ul>-->
+  <!--      </body>-->
+  <!--      <tr>-->
+  <!--        <footer>-->
+  <!--          <div>-->
+  <!--            <label>{{ tasks.length }} item left</label>-->
+  <!--            <button value="all" @click="filter = 'all'" class="btn btn-info">All</button>-->
+  <!--            <button id="activeButton" value="active" @click="filter = 'active'" class="btn btn-info">Active {{-->
+  <!--                activeTasks.length-->
+  <!--              }}-->
+  <!--            </button>-->
+  <!--            <button value="completed" @click="filter = 'completed'" class="btn btn-info">Completed {{-->
+  <!--                completedTasks.length-->
+  <!--              }}-->
+  <!--            </button>-->
+  <!--          </div>-->
+  <!--          <button @click="deleteCompleted(task.id)" v-if="completedTasks.length > 0" class="btn btn-danger">Delete-->
+  <!--            completed-->
+  <!--          </button>-->
+  <!--        </footer>-->
+  <!--      </tr>-->
+  <!--    </div>-->
+  <section class="app">
+    <header>
+      <h1>todos</h1>
+      <div class="one-line">
+
+<!--        <button @click="UnCheckAll">-->
+<!--          <img src="../src/assets/delete-all.svg">-->
+<!--        </button>-->
+        <button >
+          <img v-if="tasks.length === 0" @click="checkAll" src="../src/assets/tick.svg">
+          <img v-else-if="tasks.length === completedTasks.length" @click="UnCheckAll" src="../src/assets/delete-all.svg">
+          <img v-else @click="checkAll" src="../src/assets/tick.svg">
+
+        </button>
+        <!--      <a @click="checkAll">all done</a>-->
+        <input class="add-todo" v-model="task" @keypress.enter="addTodo" type="text"
+               placeholder="What needs to be done?"
+               autofocus>
       </div>
-    </div>
-  </div>
+
+    </header>
+    <section class="main">
+      <!--      <input class="check-all" @click="checkAll" type="checkbox">-->
+      <!--      <label for="check-all"></label>-->
+      <ul class="todo-list">
+        <li class="completed" v-for="task in getTasks" v-bind:key="task.id">
+          <div class="view">
+            <label>
+              <input class="toggle" v-model="task.completed" type="checkbox">
+              <span class="checkmark"></span>
+            </label>
+              <del class="todo-completed" v-if="task.completed == true">{{ task.task }}</del>
+            <label v-else="">{{ task.task }}</label>
+            <button @click="deleteTodo(task.id)">
+              <img src="../src/assets/cross.svg">
+            </button>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <footer class="footer">
+      <span class="todo-count">
+        <strong>{{ tasks.length }}</strong> items left
+      </span>
+      <ul class="filters">
+        <li>
+          <a @click="filter = 'all'">All</a>
+          <!--          <button value="all" @click="filter = 'all'">All</button>-->
+        </li>
+        <li>
+          <a @click="filter = 'active'">Active</a>
+          <!--          <button value="all" @click="filter = 'all'">All</button>-->
+        </li>
+        <li>
+          <a @click="filter = 'completed'">Completed</a>
+          <!--          <button value="all" @click="filter = 'all'">All</button>-->
+        </li>
+      </ul>
+
+    </footer>
+
+  </section>
+
 </template>
+
 
 <script>
 
@@ -57,7 +111,7 @@ export default {
     return {
       id: 0,
       task: '',
-      completed: false,
+      filter: 'all',
       tasks: []
     }
   },
@@ -67,7 +121,7 @@ export default {
         this.tasks.push({
           task: this.task,
           id: this.id,
-          completed: this.completed
+          completed: false
         })
       }
       this.id++
@@ -82,43 +136,22 @@ export default {
       this.tasks = this.tasks.filter(el => !el.completed)
 
     },
-    isCompleted() {
-      this.completed = true;
-      console.log('isCompleted')
-    },
-    isActive() {
-      this.completed = false;
-      console.log('isActive')
-    },
-    isAll() {
-      this.tasks;
-      console.log('isAll')
-    },
     checkAll() {
-      if (!this.completed) {
-        for (var key in this.tasks) {
-          this.tasks[key].completed = true
-        }
+      for (var key in this.tasks) {
+
+        this.tasks[key].completed = true;
       }
     },
     UnCheckAll() {
-      if (this.completed) {
-        for (var key in this.tasks) {
+      let allCompletedTasks = this.tasks.filter(task => task.completed)
+      // let allCompletedTasks = this.tasks.filter(el => el.filter === 'completed')
+      console.log('1212'+ allCompletedTasks)
+      for (var key in this.tasks) {
+        if (this.tasks.length === allCompletedTasks.length) {
           this.tasks[key].completed = false
         }
       }
-
-    }
-    // filtered () {
-    //   var filtered = this.tasks
-    //   this.tasks.forEach(filter => {
-    //     filtered = filtered.filter(record => {
-    //       return filter.completed === true
-    //           ? new RegExp(filter.value, 'i').test(record[filter.completed])
-    //           : record[filter.completed] == filter.value
-    //     })
-    //   })
-    //   return filtered
+    },
   },
   components: {},
   computed: {
@@ -129,30 +162,17 @@ export default {
       return activeTasks;
     },
     completedTasks() {
-      let completedTasks = this.tasks.filter((el) => {
-        return el.completed == true;
-      })
-      return completedTasks;
+      let allCompletedTasks = this.tasks.filter(task => task.completed)
+      return allCompletedTasks;
     },
     getTasks() {
-      if (this.completed) {
+      if (this.filter === 'completed') {
         return this.tasks.filter((el) => el.completed === true)
-      } else if (!this.completed) {
+      } else if (this.filter === 'active') {
         return this.tasks.filter((el) => el.completed === false)
       }
       return this.tasks
     }
-
-    // this.tasks.map(el => el.completed === true)
-    // // this.tasks.forEach(filter => {
-    // //   // filtered = filtered.filter(record => {
-    // //   return filter.completed === true
-    // //     // ? new RegExp(filter.value, 'i').test(record[filter.completed])
-    // //     //     : record[filter.completed] == filter.value
-    // //   // })
-    // // })
-    // console.log('hello'+this.tasks.map(el => el.completed === true))
-    // return filtered
   }
 }
 </script>

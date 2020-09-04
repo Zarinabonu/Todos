@@ -9,7 +9,7 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="dist/css/main.css">
+    <link rel="stylesheet" href="../src/main.css">
     <title><%= htmlWebpackPlugin.options.title %></title>
     <style>
         body {
@@ -79,7 +79,6 @@
             display: block;
             position: relative;
             padding-left: 35px;
-            margin-bottom: 12px;
             cursor: pointer;
             font-size: 22px;
             -webkit-user-select: none;
@@ -177,7 +176,6 @@
         .todo-list li label {
             word-break: break-all;
             padding: 15px 15px 15px 10px;
-            line-height: 1.2;
             transition: color 0.4s;
         }
         .todo-list .view button {
@@ -269,7 +267,6 @@
         }
         del {
             display: inline-block;
-            margin-bottom: .5rem;
         }
         .one-line input:focus{
             outline: none;
@@ -283,6 +280,28 @@
             line-height: 20px;
             text-decoration: none;
             cursor: pointer;
+        }
+        label {
+            margin-bottom: 0;
+        }
+        .one-line .deleteButton {
+            width: 13px;
+        }
+        .info {
+            margin: 65px auto 0;
+            color: #bfbfbf;
+            font-size: 10px;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+            text-align: center;
+            padding-right: 41em;
+        }
+        .info p {
+            line-height: 1;
+        }
+        .info a {
+            color: inherit;
+            text-decoration: none;
+            font-weight: 400;
         }
     </style>
 </head>
